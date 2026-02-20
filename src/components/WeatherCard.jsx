@@ -1,6 +1,54 @@
-import { Cloud, Eye, MapPin, Sunrise, Sunset } from 'lucide-react';
+import {
+  MapPin,
+  Sunrise,
+  Sunset,
+  Wind,
+  Droplets,
+  Gauge,
+  Thermometer,
+  Eye,
+} from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
+import { formatTemperature, getWeatherIcon } from '../utils/weatherUtils';
 
-const WeatherCard = () => {
+const WeatherCard = ({ weather }) => {
+  const iconName = getWeatherIcon(weather.weather[0]);
+  const IconComponent = LucideIcons[iconName];
+
+  const WeatherStats = [
+    {
+      icon: Eye,
+      label: 'Visibility',
+      value: `${(weather.visibility / 1000).toFixed(1)} km`,
+      color: 'text-blue-300',
+    },
+    {
+      icon: Wind,
+      label: 'Wind Speed',
+      value: `${weather.wind.speed.toFixed(1)} m/s`,
+      color: 'text-green-300',
+    },
+    {
+      icon: Droplets,
+      label: 'Humidity',
+      value: `${weather.main.humidity}%`,
+      color: 'text-cyan-300',
+    },
+    {
+      icon: Gauge,
+      label: 'Pressure',
+      value: `${weather.main.pressure} hPa`,
+      color: 'text-purple-300',
+    },
+    {
+      icon: Thermometer,
+      label: 'Feels Like',
+      value: `${formatTemperature(weather.main.feels_like)}°`,
+      color: 'text-orange-300',
+    },
+  ];
+
+  console.log(weather);
   return (
     <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl hover:bg-white/15 transition-all duration-300">
       <div className="flex items-center justify-between mb-8">
@@ -9,8 +57,8 @@ const WeatherCard = () => {
             <MapPin className="w-5 h-5 text-white/80" />
           </div>
           <div>
-            <h2 className="text-white font-semibold text-lg">Seoul</h2>
-            <p className="text-white/60 text-sm">South Korea</p>
+            <h2 className="text-white font-semibold text-lg">{weather.name}</h2>
+            <p className="text-white/60 text-sm">{weather.sys.country}</p>
           </div>
         </div>
 
@@ -36,7 +84,7 @@ const WeatherCard = () => {
           </div>
         </div>
         <div className="text-white/90 transform hover:scale-110 transition-transform duration-300">
-          <Cloud className="w-24 h-24" />
+          <IconComponent className="w-24 h-24" />
         </div>
       </div>
 
