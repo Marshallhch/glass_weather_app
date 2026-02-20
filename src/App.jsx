@@ -3,11 +3,13 @@ import ErrorMessage from './components/ErrorMessage';
 import LoadingSpinner from './components/LoadingSpinner';
 import SearchBar from './components/SearchBar';
 import WeatherCard from './components/WeatherCard';
+import WeatherForecast from './components/WeatherForecast';
 import useWeather from './hook/useWeather';
 
 function App() {
   // hook data
-  const { loading, error } = useWeather();
+  const { loading, error, fetchWeatherByCity, currentWeather } = useWeather();
+  // console.log(currentWeather);
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Background */}
@@ -43,18 +45,20 @@ function App() {
 
             {/* Search Bar */}
             <div className="flex flex-col lg:flex-row items-center justify-center space-y-6 lg:space-y-0 lg:space-x-6 mb-12">
-              <SearchBar />
+              <SearchBar onSearch={fetchWeatherByCity} loading={loading} />
             </div>
           </div>
 
           {/* Main Section Contents */}
-          <div className="flex justify-center">
+          <div className="space-y-8">
             {loading && (
-              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
-                <LoadingSpinner />
-                <p className="text-white/80 text-center mt-4 font-medium">
-                  Fetching Latest Weather Data...
-                </p>
+              <div className="flex justify-center">
+                <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
+                  <LoadingSpinner />
+                  <p className="text-white/80 text-center mt-4 font-medium">
+                    Fetching Latest Weather Data...
+                  </p>
+                </div>
               </div>
             )}
 
@@ -69,7 +73,9 @@ function App() {
                 <div className="xl:col-span-2">
                   <WeatherCard />
                 </div>
-                <div className="xl:col-span-1"></div>
+                <div className="xl:col-span-1">
+                  <WeatherForecast />
+                </div>
               </div>
             </div>
           </div>
