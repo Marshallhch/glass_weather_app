@@ -26,14 +26,14 @@ export const formatTemperature = (temp, unit) => {
 };
 
 export const formatTime = (timestamp) => {
-  return new Date(timestamp * 1000).toLocaleTimeString('en-US', {
+  return new Date(timestamp * 1000).toLocaleTimeString('ko-KR', {
     hour: '2-digit',
     minute: '2-digit',
   });
 };
 
 export const formatDate = (timestamp) => {
-  return new Date(timestamp * 1000).toLocaleDateString('en-US', {
+  return new Date(timestamp * 1000).toLocaleDateString('ko-KR', {
     weekday: 'short',
     month: 'short',
     day: 'numeric',
