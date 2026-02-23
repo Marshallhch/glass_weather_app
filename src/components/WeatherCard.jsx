@@ -52,7 +52,7 @@ const WeatherCard = ({ weather, units }) => {
     },
   ];
 
-  console.log(weather);
+  // console.log(weather);
   return (
     <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl hover:bg-white/15 transition-all duration-300">
       <div className="flex items-center justify-between mb-8">

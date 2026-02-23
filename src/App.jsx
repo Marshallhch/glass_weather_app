@@ -5,6 +5,7 @@ import SearchBar from './components/SearchBar';
 import TemperatureToggle from './components/TemperatureToggle';
 import WeatherCard from './components/WeatherCard';
 import WeatherForecast from './components/WeatherForecast';
+import WeatherMap from './components/WeatherMap';
 import useWeather from './hook/useWeather';
 
 function App() {
@@ -94,6 +95,8 @@ function App() {
                     <WeatherForecast forecast={forecast} units={units} />
                   </div>
                 </div>
+
+                <WeatherMap weather={currentWeather} />
               </div>
             )}
           </div>

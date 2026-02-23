@@ -1,5 +1,9 @@
 import { Calendar, Cloud, Droplet } from 'lucide-react';
-import { formatDate, getWeatherIcon } from '../utils/weatherUtils';
+import {
+  formatDate,
+  formatTemperature,
+  getWeatherIcon,
+} from '../utils/weatherUtils';
 import * as LucideIcons from 'lucide-react';
 
 const WeatherForecast = ({ forecast, units }) => {
@@ -55,12 +59,16 @@ const WeatherForecast = ({ forecast, units }) => {
                 <div className="flex items-center space-x-2 text-white/60">
                   <Droplet className="w-4 h-4 text-blue-300" />
                   <span className="text-sm font-medium">
-                    {Math.round(item.pop)}%
+                    {Math.round(item.pop * 100)}%
                   </span>
                 </div>
                 <div className="text-right">
-                  <div className="text-white font-bold text-xl">10°</div>
-                  <div className="text-white text-sm font-medium">4°</div>
+                  <div className="text-white font-bold text-xl">
+                    {formatTemperature(item.main.temp_max, units)}°
+                  </div>
+                  <div className="text-white text-sm font-medium">
+                    {formatTemperature(item.main.temp_min, units)}°
+                  </div>
                 </div>
               </div>
             </div>
